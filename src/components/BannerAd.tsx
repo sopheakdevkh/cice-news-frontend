@@ -109,7 +109,7 @@ export default function BannerAd({ variant = 'leaderboard', className = '' }: Ba
 
         <div className="relative z-10 w-full">
           <Link
-            to="/en/contact"
+            to="/contact"
             className="inline-block w-full py-2 px-4 text-xs font-semibold uppercase tracking-wider text-white bg-amber-600/80 hover:bg-amber-500 rounded-xs transition-colors border border-amber-400/30 shadow-xs"
           >
             Connect With Us

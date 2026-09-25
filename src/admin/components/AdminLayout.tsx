@@ -178,7 +178,7 @@ export default function AdminLayout() {
 
             {/* Quick Link to View Public Front-End */}
             <Link
-              to={`/${i18n.language.startsWith('zh') ? 'zh' : 'en'}`}
+              to={i18n.language.startsWith('zh') ? '/zh' : '/'}
               target="_blank"
               rel="noopener noreferrer"
               className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-sky-800 bg-sky-50 hover:bg-sky-100 border border-sky-200 transition-colors"
@@ -202,7 +202,7 @@ export default function AdminLayout() {
 
             {/* Mobile View Site Link */}
             <Link
-              to={`/${i18n.language.startsWith('zh') ? 'zh' : 'en'}`}
+              to={i18n.language.startsWith('zh') ? '/zh' : '/'}
               target="_blank"
               className="sm:hidden p-2 text-sky-700 hover:bg-sky-50 rounded-lg"
               title={t('admin.viewPublicPortal')}

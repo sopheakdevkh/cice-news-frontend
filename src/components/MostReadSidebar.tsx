@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Image from '@/components/Image';
 import { Article } from '@/lib/data';
+import { getArticlePath } from '@/lib/routes';
 import BannerAd from './BannerAd';
 import {
   LinkedInIcon,
@@ -55,7 +56,7 @@ export default function MostReadSidebar({
 
                 {/* Square Thumbnail */}
                 <Link
-                  to={`/${lang}/article/${item.slug}`}
+                  to={getArticlePath(item.slug, lang)}
                   className="relative h-18 w-18 sm:h-20 sm:w-20 shrink-0 overflow-hidden block"
                 >
                   <Image
@@ -68,7 +69,7 @@ export default function MostReadSidebar({
 
                 {/* Title */}
                 <div className="flex-1 min-w-0 pt-0.5">
-                  <Link to={`/${lang}/article/${item.slug}`}>
+                  <Link to={getArticlePath(item.slug, lang)}>
                     <h4 className="font-serif-heading text-xs sm:text-[13px] font-bold text-[#142249] leading-snug line-clamp-3 group-hover:text-sky-700 transition-colors">
                       {item.title}
                     </h4>

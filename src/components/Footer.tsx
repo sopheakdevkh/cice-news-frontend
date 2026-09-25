@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Image from '@/components/Image';
+import { getHomePath, getLocalizedPath } from '@/lib/routes';
 import {
   LinkedInIcon,
   FacebookIcon,
@@ -24,7 +25,7 @@ export default function Footer({ lang = 'en' }: FooterProps) {
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-6">
           {/* Left: Brand Logo */}
           <div className="flex flex-col items-center md:items-start text-center md:text-left">
-            <Link to={`/${lang}`} className="relative h-14 md:h-16 w-52 md:w-60 mb-0.5">
+            <Link to={getHomePath(lang)} className="relative h-14 md:h-16 w-52 md:w-60 mb-0.5">
               <Image
                 src="/cice-news-logo.webp"
                 alt="CICE News"
@@ -36,23 +37,23 @@ export default function Footer({ lang = 'en' }: FooterProps) {
 
           {/* Center: Nav Links */}
           <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-slate-200 font-light">
-            <Link to={`/${lang}/about`} className="hover:text-amber-400 transition-colors">
+            <Link to={getLocalizedPath('/about', lang)} className="hover:text-amber-400 transition-colors">
               {t('footer.aboutUs')}
             </Link>
             <span className="text-slate-400/50 hidden sm:inline">|</span>
-            <Link to={`/${lang}/contact`} className="hover:text-amber-400 transition-colors">
+            <Link to={getLocalizedPath('/contact', lang)} className="hover:text-amber-400 transition-colors">
               {t('footer.contact')}
             </Link>
             <span className="text-slate-400/50 hidden sm:inline">|</span>
-            <Link to={`/${lang}/advertising`} className="hover:text-amber-400 transition-colors">
+            <Link to={getLocalizedPath('/advertising', lang)} className="hover:text-amber-400 transition-colors">
               {t('footer.advertising')}
             </Link>
             <span className="text-slate-400/50 hidden sm:inline">|</span>
-            <Link to={`/${lang}/terms`} className="hover:text-amber-400 transition-colors">
+            <Link to={getLocalizedPath('/terms', lang)} className="hover:text-amber-400 transition-colors">
               {t('footer.termsOfUse')}
             </Link>
             <span className="text-slate-400/50 hidden sm:inline">|</span>
-            <Link to={`/${lang}/privacy`} className="hover:text-amber-400 transition-colors">
+            <Link to={getLocalizedPath('/privacy', lang)} className="hover:text-amber-400 transition-colors">
               {t('footer.privacyPolicy')}
             </Link>
           </div>

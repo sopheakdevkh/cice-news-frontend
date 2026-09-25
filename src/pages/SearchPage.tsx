@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useSearchParams, useLocation } from 'react-router-dom';
 import {
   HERO_ARTICLE_EN,
   SUB_GRID_ARTICLES_EN,
@@ -13,10 +13,12 @@ import {
 import CategoryList from '@/components/CategoryList';
 import MostReadSidebar from '@/components/MostReadSidebar';
 import { useTranslation } from 'react-i18next';
+import { detectLang } from '@/lib/routes';
 
 export default function SearchPage() {
   const { t } = useTranslation();
-  const { lang = 'en' } = useParams<{ lang?: string }>();
+  const location = useLocation();
+  const lang = detectLang(location.pathname);
   const [searchParams] = useSearchParams();
   const q = searchParams.get('q') || '';
   const isZh = lang === 'zh';

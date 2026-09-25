@@ -217,7 +217,7 @@ export default function ArticlesPage() {
                             {item.title}
                           </Link>
                           <p className="text-[11px] text-slate-400 truncate mt-0.5">
-                            /{item.lang}/article/{item.slug}
+                            {item.lang === 'zh' ? `/zh/article/${item.slug}` : `/article/${item.slug}`}
                           </p>
                         </div>
                       </div>
@@ -263,7 +263,7 @@ export default function ArticlesPage() {
                       <div className="flex items-center justify-end gap-1.5">
                         {/* Live reader preview */}
                         <Link
-                          to={`/${item.lang}/article/${item.slug}`}
+                          to={item.lang === 'zh' ? `/zh/article/${item.slug}` : `/article/${item.slug}`}
                           target="_blank"
                           className="p-1.5 text-slate-400 hover:text-sky-700 hover:bg-slate-100 rounded-sm transition-colors"
                           title="Preview Public Page"

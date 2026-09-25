@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Image from '@/components/Image';
 import BannerAd from '@/components/BannerAd';
 import HeroArticle from '@/components/HeroArticle';
 import CategoryList from '@/components/CategoryList';
 import ChineseMagazineGrid from '@/components/ChineseMagazineGrid';
+import { detectLang } from '@/lib/routes';
 import {
   HERO_ARTICLE_EN,
   SUB_GRID_ARTICLES_EN,
@@ -15,7 +16,8 @@ import {
 
 export default function HomePage() {
   const { t } = useTranslation();
-  const { lang = 'en' } = useParams<{ lang?: string }>();
+  const location = useLocation();
+  const lang = detectLang(location.pathname);
   const isZh = lang === 'zh';
 
   useEffect(() => {

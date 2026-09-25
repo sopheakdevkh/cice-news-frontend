@@ -1,5 +1,11 @@
 import React from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
+
+function RedirectLegacyEn() {
+  const location = useLocation();
+  const cleanPath = location.pathname.replace(/^\/en(\/|$)/, '/') + location.search + location.hash;
+  return <Navigate to={cleanPath || '/'} replace />;
+}
 import { AuthProvider } from '@/context/AuthContext';
 import Layout from '@/components/Layout';
 import HomePage from '@/pages/HomePage';
@@ -25,11 +31,20 @@ export default function App() {
     <AuthProvider>
       <ScrollToTop />
       <Routes>
-        {/* Root redirect to default public language */}
-        <Route path="/" element={<Navigate to="/en" replace />} />
+        {/* Redirect legacy /en paths to default / paths */}
+        <Route path="/en" element={<Navigate to="/" replace />} />
+        <Route path="/en/*" element={<RedirectLegacyEn />} />
 
-        {/* Public Localized routes: /:lang */}
-        <Route path="/:lang" element={<Layout />}>
+        {/* Default Public Routes (English) without /en */}
+        <Route element={<Layout />}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/category/:slug" element={<CategoryPage />} />
+          <Route path="/article/:slug" element={<ArticlePage />} />
+          <Route path="/search" element={<SearchPage />} />
+        </Route>
+
+        {/* Localized Chinese Routes: /zh */}
+        <Route path="/zh" element={<Layout />}>
           <Route index element={<HomePage />} />
           <Route path="category/:slug" element={<CategoryPage />} />
           <Route path="article/:slug" element={<ArticlePage />} />

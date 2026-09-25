@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Image from '@/components/Image';
 import { Article } from '@/lib/data';
+import { getArticlePath, getCategoryPath } from '@/lib/routes';
 
 interface CategoryListProps {
   variant?: 'showcase' | 'feed';
@@ -44,7 +45,7 @@ export default function CategoryList({
                 <div className="flex items-end">
                   <div className="inline-block">
                     <Link
-                      to={`/${lang}/category/${item.categorySlug}`}
+                      to={getCategoryPath(item.categorySlug, lang)}
                       className="font-serif-heading text-sm font-bold tracking-wider text-[#142249] hover:text-sky-800 transition-colors uppercase block pb-1.5"
                     >
                       {item.category}
@@ -57,7 +58,7 @@ export default function CategoryList({
 
               {/* Card Image */}
               <Link
-                to={`/${lang}/article/${item.slug}`}
+                to={getArticlePath(item.slug, lang)}
                 className="relative h-40 w-full overflow-hidden mb-2.5 block"
               >
                 <Image
@@ -69,7 +70,7 @@ export default function CategoryList({
               </Link>
 
               {/* Card Title */}
-              <Link to={`/${lang}/article/${item.slug}`}>
+              <Link to={getArticlePath(item.slug, lang)}>
                 <h3 className="font-serif-heading text-sm font-bold text-[#142249] leading-snug line-clamp-3 group-hover:text-sky-800 transition-colors mb-2">
                   {item.title}
                 </h3>
@@ -95,7 +96,7 @@ export default function CategoryList({
           >
             {/* Article Thumbnail */}
             <Link
-              to={`/${lang}/article/${article.slug}`}
+              to={getArticlePath(article.slug, lang)}
               className="relative h-52 sm:h-44 md:h-48 sm:w-72 md:w-80 shrink-0 overflow-hidden block"
             >
               <Image
@@ -108,7 +109,7 @@ export default function CategoryList({
 
             {/* Article Info: Title + Date */}
             <div className="flex flex-col justify-start flex-1 pt-1">
-              <Link to={`/${lang}/article/${article.slug}`}>
+              <Link to={getArticlePath(article.slug, lang)}>
                 <h2 className="font-serif-heading text-base sm:text-lg md:text-xl font-bold text-[#142249] leading-snug group-hover:text-sky-700 transition-colors mb-2.5">
                   {article.title}
                 </h2>

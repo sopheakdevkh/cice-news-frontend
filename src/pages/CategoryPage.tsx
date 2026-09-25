@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import CategoryList from '@/components/CategoryList';
 import MostReadSidebar from '@/components/MostReadSidebar';
 import Pagination from '@/components/Pagination';
+import { detectLang, getHomePath } from '@/lib/routes';
 import {
   CATEGORY_ARTICLES_MAP,
   MOST_READ_ARTICLES_EN,
@@ -12,7 +13,9 @@ import {
 
 export default function CategoryPage() {
   const { t } = useTranslation();
-  const { lang = 'en', slug = 'cambodia' } = useParams<{ lang?: string; slug?: string }>();
+  const location = useLocation();
+  const { slug = 'cambodia' } = useParams<{ slug?: string }>();
+  const lang = detectLang(location.pathname);
   const isZh = lang === 'zh';
 
   const categoryMapEn: Record<string, string> = {
@@ -58,7 +61,7 @@ export default function CategoryPage() {
         <div className="lg:col-span-8">
           {/* Breadcrumb Navigation: Home > Category */}
           <nav className="flex items-center gap-1.5 text-xs text-sky-800 mb-2 font-light uppercase">
-            <Link to={`/${lang}`} className="text-sky-800 hover:underline">
+            <Link to={getHomePath(lang)} className="text-sky-800 hover:underline">
               {t('common.home')}
             </Link>
             <span className="text-slate-400">&gt;</span>

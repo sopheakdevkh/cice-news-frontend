@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useLocation } from 'react-router-dom';
 import Image from '@/components/Image';
 import {
   getArticleBySlug,
@@ -12,10 +12,13 @@ import { Calendar, Clock, ChevronLeft, ChevronRight } from 'lucide-react';
 import { FacebookIcon, XIcon, LinkedInIcon } from '@/components/SocialIcons';
 import { useTranslation } from 'react-i18next';
 import { getArticleBySlugFromStore } from '@/lib/dataStore';
+import { detectLang, getHomePath, getCategoryPath, getArticlePath } from '@/lib/routes';
 
 export default function ArticlePage() {
   const { t } = useTranslation();
-  const { lang = 'en', slug = '' } = useParams<{ lang?: string; slug?: string }>();
+  const location = useLocation();
+  const { slug = '' } = useParams<{ slug?: string }>();
+  const lang = detectLang(location.pathname);
   const isZh = lang === 'zh';
   const article = getArticleBySlugFromStore(slug) || getArticleBySlug(slug);
 
@@ -37,7 +40,7 @@ export default function ArticlePage() {
           {t('common.articleNotFoundDesc')}
         </p>
         <Link
-          to={`/${lang}`}
+          to={getHomePath(lang)}
           className="inline-block bg-[#142249] text-white px-6 py-2.5 rounded-xs text-sm font-semibold hover:bg-sky-900 transition-colors"
         >
           {t('common.returnHome')}
@@ -76,12 +79,12 @@ export default function ArticlePage() {
         <article className="lg:col-span-8">
           {/* Breadcrumb Navigation */}
           <nav className="flex items-center gap-1.5 text-xs text-sky-800 mb-3 font-light uppercase">
-            <Link to={`/${lang}`} className="text-sky-800 hover:underline uppercase">
+            <Link to={getHomePath(lang)} className="text-sky-800 hover:underline uppercase">
               {isZh ? '首页' : 'Home'}
             </Link>
             <span className="text-slate-400">&gt;</span>
             <Link
-              to={`/${lang}/category/${article.categorySlug}`}
+              to={getCategoryPath(article.categorySlug, lang)}
               className="text-sky-800 hover:underline uppercase"
             >
               {article.category}
@@ -192,7 +195,7 @@ export default function ArticlePage() {
               {/* Left: Previous Article */}
               {prevArticle ? (
                 <Link
-                  to={`/${lang}/article/${prevArticle.slug}`}
+                  to={getArticlePath(prevArticle.slug, lang)}
                   className="flex items-center gap-3.5 group pr-2 sm:pr-4"
                 >
                   <ChevronLeft className="w-6 h-6 text-[#142249] shrink-0 stroke-[3] group-hover:-translate-x-1 transition-transform" />
@@ -215,7 +218,7 @@ export default function ArticlePage() {
               {/* Right: Next Article */}
               {nextArticle ? (
                 <Link
-                  to={`/${lang}/article/${nextArticle.slug}`}
+                  to={getArticlePath(nextArticle.slug, lang)}
                   className="flex items-center justify-end gap-3.5 group pl-2 sm:pl-4 text-right ml-auto"
                 >
                   <div className="min-w-0">

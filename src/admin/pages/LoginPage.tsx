@@ -60,7 +60,7 @@ export default function LoginPage() {
 
       {/* Header / Logo */}
       <div className="sm:mx-auto sm:w-full sm:max-w-md text-center z-10">
-        <Link to="/en" className="inline-block mb-3">
+        <Link to="/" className="inline-block mb-3">
           <div className="relative h-16 w-56 mx-auto">
             <Image
               src="/cice-news-logo.webp"
@@ -188,7 +188,7 @@ export default function LoginPage() {
         {/* Back to public site */}
         <div className="mt-4 text-center">
           <Link
-            to="/en"
+            to="/"
             className="text-xs text-slate-400 hover:text-amber-400 transition-colors inline-flex items-center gap-1"
           >
             <span>← Return to Public Website</span>

@@ -208,7 +208,7 @@ export default function DashboardPage() {
                     <div className="flex items-center justify-end gap-1.5">
                       {/* View live in front-end */}
                       <Link
-                        to={`/${item.lang}/article/${item.slug}`}
+                        to={item.lang === 'zh' ? `/zh/article/${item.slug}` : `/article/${item.slug}`}
                         target="_blank"
                         className="p-1 text-slate-400 hover:text-sky-700 transition-colors"
                         title="Preview Public Page"

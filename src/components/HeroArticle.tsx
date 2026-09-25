@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Image from '@/components/Image';
 import { Article } from '@/lib/data';
+import { getArticlePath } from '@/lib/routes';
 
 interface HeroArticleProps {
   hero: Article;
@@ -33,7 +34,7 @@ export default function HeroArticle({ hero, subArticles, lang = 'en' }: HeroArti
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-8">
         {/* Left: Featured Image */}
         <div className="lg:col-span-8 relative h-72 sm:h-96 md:h-[420px] w-full overflow-hidden group">
-          <Link to={`/${lang}/article/${hero.slug}`}>
+          <Link to={getArticlePath(hero.slug, lang)}>
             <Image
               src={hero.image}
               alt={hero.title}
@@ -50,7 +51,7 @@ export default function HeroArticle({ hero, subArticles, lang = 'en' }: HeroArti
             <span className="inline-block text-[11px] font-bold text-[#142249] tracking-widest uppercase mb-2">
               {hero.category}
             </span>
-            <Link to={`/${lang}/article/${hero.slug}`}>
+            <Link to={getArticlePath(hero.slug, lang)}>
               <h1 className="font-serif-heading text-2xl sm:text-3xl font-bold text-[#142249] leading-tight hover:text-sky-800 transition-colors mb-4">
                 {hero.title}
               </h1>
@@ -62,7 +63,7 @@ export default function HeroArticle({ hero, subArticles, lang = 'en' }: HeroArti
 
           <div>
             <Link
-              to={`/${lang}/article/${hero.slug}`}
+              to={getArticlePath(hero.slug, lang)}
               className="inline-flex items-center gap-2 bg-[#142249] hover:bg-[#0e1936] text-white px-6 py-2.5 text-xs font-semibold tracking-wider transition-colors"
             >
               <span>{t('common.readMore')}</span>
@@ -82,7 +83,7 @@ export default function HeroArticle({ hero, subArticles, lang = 'en' }: HeroArti
             } mb-6 md:mb-0 pb-6 md:pb-0 border-b md:border-b-0 last:border-b-0 last:mb-0 last:pb-0`}
           >
             <Link
-              to={`/${lang}/article/${article.slug}`}
+              to={getArticlePath(article.slug, lang)}
               className="relative h-44 w-full overflow-hidden mb-2.5 block"
             >
               <Image
@@ -97,7 +98,7 @@ export default function HeroArticle({ hero, subArticles, lang = 'en' }: HeroArti
               {article.category}
             </span>
 
-            <Link to={`/${lang}/article/${article.slug}`}>
+            <Link to={getArticlePath(article.slug, lang)}>
               <h3 className="font-serif-heading text-sm sm:text-base font-bold text-[#142249] leading-snug line-clamp-2 group-hover:text-sky-800 transition-colors mb-2">
                 {article.title}
               </h3>

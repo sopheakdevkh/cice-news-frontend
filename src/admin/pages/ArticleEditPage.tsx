@@ -204,7 +204,7 @@ export default function ArticleEditPage() {
                 URL Slug (Perm-link)
               </label>
               <div className="flex items-center rounded-lg border border-slate-200 bg-slate-50/80 px-3 py-1.5 text-xs text-slate-500">
-                <span className="text-slate-400 select-none">/{lang}/article/</span>
+                <span className="text-slate-400 select-none">{lang === 'zh' ? '/zh/article/' : '/article/'}</span>
                 <input
                   type="text"
                   value={slug}

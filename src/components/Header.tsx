@@ -11,6 +11,12 @@ import {
   InstagramIcon,
 } from '@/components/SocialIcons';
 import { CATEGORIES_EN, CATEGORIES_ZH } from '@/lib/data';
+import {
+  getHomePath,
+  getCategoryPath,
+  getSearchPath,
+  getSwitchLanguageUrl,
+} from '@/lib/routes';
 
 interface HeaderProps {
   lang: 'en' | 'zh';
@@ -33,15 +39,7 @@ export default function Header({ lang }: HeaderProps) {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (!searchQuery.trim()) return;
-    navigate(`/${lang}/search?q=${encodeURIComponent(searchQuery.trim())}`);
-  };
-
-  const getTargetUrlForLang = (targetLang: 'en' | 'zh') => {
-    if (!pathname) return `/${targetLang}`;
-    const segments = pathname.split('/').filter(Boolean);
-    if (segments.length === 0) return `/${targetLang}`;
-    segments[0] = targetLang;
-    return `/${segments.join('/')}${location.search}`;
+    navigate(getSearchPath(searchQuery.trim(), lang));
   };
 
   return (
@@ -99,7 +97,7 @@ export default function Header({ lang }: HeaderProps) {
 
         {/* Center: CICE News Logo */}
         <div className="flex flex-col items-center justify-center text-center">
-          <Link to={`/${lang}`} className="inline-flex flex-col items-center group">
+          <Link to={getHomePath(lang)} className="inline-flex flex-col items-center group">
             <div className="relative h-14 sm:h-16 md:h-20 w-48 sm:w-60 md:w-72">
               <Image
                 src="/cice-news-logo.webp"
@@ -137,7 +135,7 @@ export default function Header({ lang }: HeaderProps) {
           {/* Desktop Language Toggle: EN | 中文 */}
           <div className="hidden sm:flex items-center gap-2 text-xs font-semibold tracking-wide ml-1">
             <Link
-              to={getTargetUrlForLang('en')}
+              to={getSwitchLanguageUrl(pathname, 'en', location.search)}
               className={`relative py-0.5 transition-colors ${
                 lang === 'en'
                   ? 'text-white font-bold'
@@ -151,7 +149,7 @@ export default function Header({ lang }: HeaderProps) {
             </Link>
             <span className="text-white/40 text-xs font-light select-none">|</span>
             <Link
-              to={getTargetUrlForLang('zh')}
+              to={getSwitchLanguageUrl(pathname, 'zh', location.search)}
               className={`relative py-0.5 transition-colors font-chinese-serif ${
                 lang === 'zh'
                   ? 'text-white font-bold'
@@ -168,7 +166,7 @@ export default function Header({ lang }: HeaderProps) {
           {/* Mobile Language Toggle */}
           <div className="flex sm:hidden items-center gap-1.5 text-xs font-semibold mr-1">
             <Link
-              to={getTargetUrlForLang('en')}
+              to={getSwitchLanguageUrl(pathname, 'en', location.search)}
               className={`relative px-1 py-0.5 ${
                 lang === 'en' ? 'text-white font-bold' : 'text-white/70'
               }`}
@@ -180,7 +178,7 @@ export default function Header({ lang }: HeaderProps) {
             </Link>
             <span className="text-white/40 text-xs">|</span>
             <Link
-              to={getTargetUrlForLang('zh')}
+              to={getSwitchLanguageUrl(pathname, 'zh', location.search)}
               className={`relative px-1 py-0.5 font-chinese-serif ${
                 lang === 'zh' ? 'text-white font-bold' : 'text-white/70'
               }`}
@@ -218,7 +216,7 @@ export default function Header({ lang }: HeaderProps) {
                 return (
                   <li key="lang-switch" className="py-2.5">
                     <Link
-                      to={getTargetUrlForLang(targetLang)}
+                      to={getSwitchLanguageUrl(pathname, targetLang, location.search)}
                       className="text-white hover:text-amber-300 transition-colors font-chinese-serif"
                     >
                       {cat.name}
@@ -229,21 +227,18 @@ export default function Header({ lang }: HeaderProps) {
 
               const isHome = cat.slug === '' || cat.slug === 'home';
               const isChineseNews = cat.slug === 'chinese-news';
-
-              const to = isChineseNews
-                ? `/${lang}`
-                : isHome
-                ? `/${lang}`
-                : `/${lang}/category/${cat.slug}`;
+              const to = getCategoryPath(cat.slug, lang);
 
               const isActive =
                 lang === 'zh'
-                  ? pathname === '/zh' || pathname === '/zh/' || pathname?.startsWith('/zh/category/chinese-news')
-                    ? isChineseNews
-                    : !isHome && pathname?.startsWith(`/${lang}/category/${cat.slug}`)
+                  ? isChineseNews
+                    ? pathname === '/zh' || pathname === '/zh/' || pathname?.startsWith('/zh/category/chinese-news')
+                    : isHome
+                    ? pathname === '/zh' || pathname === '/zh/'
+                    : pathname?.startsWith(`/zh/category/${cat.slug}`)
                   : isHome
-                  ? pathname === `/${lang}` || pathname === `/${lang}/`
-                  : pathname?.startsWith(`/${lang}/category/${cat.slug}`);
+                  ? pathname === '/'
+                  : pathname?.startsWith(`/category/${cat.slug}`);
 
               return (
                 <li key={cat.slug || 'home'} className="relative py-2.5">
@@ -290,7 +285,7 @@ export default function Header({ lang }: HeaderProps) {
                 <span className="text-xs text-white/60">{t('common.language')}</span>
                 <div className="flex items-center gap-3 text-xs font-semibold">
                   <Link
-                    to={getTargetUrlForLang('en')}
+                    to={getSwitchLanguageUrl(pathname, 'en', location.search)}
                     onClick={() => setMobileMenuOpen(false)}
                     className={`relative py-0.5 ${
                       lang === 'en' ? 'text-amber-400 font-bold' : 'text-white/80 hover:text-white'
@@ -301,7 +296,7 @@ export default function Header({ lang }: HeaderProps) {
                   </Link>
                   <span className="text-white/30">|</span>
                   <Link
-                    to={getTargetUrlForLang('zh')}
+                    to={getSwitchLanguageUrl(pathname, 'zh', location.search)}
                     onClick={() => setMobileMenuOpen(false)}
                     className={`relative py-0.5 font-chinese-serif ${
                       lang === 'zh' ? 'text-amber-400 font-bold' : 'text-white/80 hover:text-white'
@@ -319,21 +314,19 @@ export default function Header({ lang }: HeaderProps) {
 
                 const to =
                   'isLangSwitch' in cat && (cat as any).isLangSwitch
-                    ? getTargetUrlForLang(targetLang)
-                    : isChineseNews
-                    ? `/${lang}`
-                    : isHome
-                    ? `/${lang}`
-                    : `/${lang}/category/${cat.slug}`;
+                    ? getSwitchLanguageUrl(pathname, targetLang, location.search)
+                    : getCategoryPath(cat.slug, lang);
 
                 const isActive =
                   lang === 'zh'
-                    ? pathname === '/zh' || pathname === '/zh/' || pathname?.startsWith('/zh/category/chinese-news')
-                      ? isChineseNews
-                      : !isHome && pathname?.startsWith(`/${lang}/category/${cat.slug}`)
+                    ? isChineseNews
+                      ? pathname === '/zh' || pathname === '/zh/' || pathname?.startsWith('/zh/category/chinese-news')
+                      : isHome
+                      ? pathname === '/zh' || pathname === '/zh/'
+                      : pathname?.startsWith(`/zh/category/${cat.slug}`)
                     : isHome
-                    ? pathname === `/${lang}` || pathname === `/${lang}/`
-                    : pathname?.startsWith(`/${lang}/category/${cat.slug}`);
+                    ? pathname === '/'
+                    : pathname?.startsWith(`/category/${cat.slug}`);
 
                 return (
                   <Link
