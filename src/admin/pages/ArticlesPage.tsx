@@ -8,11 +8,13 @@ import {
   ExternalLink,
   Edit3,
   Trash2,
-  Filter,
-  CheckCircle,
-  XCircle,
-  RotateCcw,
+  ChevronLeft,
+  ChevronRight,
+  ChevronsLeft,
+  ChevronsRight,
 } from 'lucide-react';
+
+const ITEMS_PER_PAGE = 7;
 
 export default function ArticlesPage() {
   const [articles, setArticles] = useState<AdminArticle[]>([]);
@@ -20,6 +22,7 @@ export default function ArticlesPage() {
   const [selectedLang, setSelectedLang] = useState<'all' | 'en' | 'zh'>('all');
   const [selectedStatus, setSelectedStatus] = useState<'all' | 'published' | 'draft'>('all');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [currentPage, setCurrentPage] = useState(1);
 
   const refreshArticles = () => {
     setArticles(loadArticles());
@@ -61,6 +64,37 @@ export default function ArticlesPage() {
     });
   }, [articles, selectedLang, selectedStatus, selectedCategory, search]);
 
+  // Reset to page 1 whenever any filter or search changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [search, selectedLang, selectedStatus, selectedCategory]);
+
+  const totalPages = Math.max(1, Math.ceil(filteredArticles.length / ITEMS_PER_PAGE));
+
+  // If currentPage exceeds totalPages after filtering/deletion, adjust it
+  useEffect(() => {
+    if (currentPage > totalPages) {
+      setCurrentPage(totalPages);
+    }
+  }, [currentPage, totalPages]);
+
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const endIndex = startIndex + ITEMS_PER_PAGE;
+  const currentArticles = filteredArticles.slice(startIndex, endIndex);
+
+  const getPaginationRange = () => {
+    const delta = 1;
+    const range: (number | string)[] = [];
+    for (let i = 1; i <= totalPages; i++) {
+      if (i === 1 || i === totalPages || (i >= currentPage - delta && i <= currentPage + delta)) {
+        range.push(i);
+      } else if (range[range.length - 1] !== '...') {
+        range.push('...');
+      }
+    }
+    return range;
+  };
+
   const handleDelete = (id: string, title: string) => {
     if (window.confirm(`Are you sure you want to delete "${title}"?`)) {
       deleteArticle(id);
@@ -84,7 +118,7 @@ export default function ArticlesPage() {
             Article Management
           </h2>
           <p className="text-xs text-slate-500 mt-1">
-            Total {articles.length} news stories in repository ({filteredArticles.length} matching filters)
+            Total {articles.length} news stories in repository ({filteredArticles.length} matching filters) • Showing 7 articles per page
           </p>
         </div>
         <Link
@@ -175,7 +209,7 @@ export default function ArticlesPage() {
         )}
       </div>
 
-      {/* Articles Table */}
+      {/* Articles Table with Pagination */}
       <div className="bg-white rounded-xl border border-slate-200/80 shadow-2xs overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
@@ -197,7 +231,7 @@ export default function ArticlesPage() {
                   </td>
                 </tr>
               ) : (
-                filteredArticles.map((item) => (
+                currentArticles.map((item) => (
                   <tr key={item.id} className="hover:bg-slate-50/70 transition-colors">
                     <td className="py-3 px-4">
                       <div className="flex items-center gap-3">
@@ -294,6 +328,93 @@ export default function ArticlesPage() {
             </tbody>
           </table>
         </div>
+
+        {/* Pagination Bar */}
+        {filteredArticles.length > 0 && (
+          <div className="px-4 py-3 bg-slate-50/75 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+            {/* Range Info */}
+            <div className="text-slate-500 text-center sm:text-left">
+              Showing <span className="font-semibold text-slate-800">{startIndex + 1}</span> to{' '}
+              <span className="font-semibold text-slate-800">
+                {Math.min(endIndex, filteredArticles.length)}
+              </span>{' '}
+              of <span className="font-semibold text-slate-800">{filteredArticles.length}</span> articles
+            </div>
+
+            {/* Pagination Controls */}
+            {totalPages > 1 && (
+              <div className="flex items-center gap-1">
+                {/* First Page Button */}
+                <button
+                  onClick={() => setCurrentPage(1)}
+                  disabled={currentPage === 1}
+                  className="p-1.5 rounded-lg border border-slate-200 bg-white text-slate-600 hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors cursor-pointer"
+                  title="First Page"
+                >
+                  <ChevronsLeft className="w-3.5 h-3.5" />
+                </button>
+
+                {/* Previous Button */}
+                <button
+                  onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                  disabled={currentPage === 1}
+                  className="p-1.5 rounded-lg border border-slate-200 bg-white text-slate-600 hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors cursor-pointer"
+                  title="Previous Page"
+                >
+                  <ChevronLeft className="w-3.5 h-3.5" />
+                </button>
+
+                {/* Page Number Buttons */}
+                <div className="flex items-center gap-1 mx-1">
+                  {getPaginationRange().map((pageItem, index) => {
+                    if (pageItem === '...') {
+                      return (
+                        <span key={`dots-${index}`} className="px-1 text-slate-400 select-none">
+                          •••
+                        </span>
+                      );
+                    }
+                    const pageNumber = pageItem as number;
+                    const isActive = pageNumber === currentPage;
+                    return (
+                      <button
+                        key={pageNumber}
+                        onClick={() => setCurrentPage(pageNumber)}
+                        className={`min-w-8 h-8 px-2 text-xs font-semibold rounded-lg transition-colors cursor-pointer ${
+                          isActive
+                            ? 'bg-[#0C195A] text-white shadow-xs'
+                            : 'bg-white border border-slate-200 text-slate-700 hover:bg-slate-50'
+                        }`}
+                      >
+                        {pageNumber}
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* Next Button */}
+                <button
+                  onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                  disabled={currentPage === totalPages}
+                  className="p-1.5 rounded-lg border border-slate-200 bg-white text-slate-600 hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors cursor-pointer"
+                  title="Next Page"
+                >
+                  <ChevronRight className="w-3.5 h-3.5" />
+                </button>
+
+                {/* Last Page Button */}
+                <button
+                  onClick={() => setCurrentPage(totalPages)}
+                  disabled={currentPage === totalPages}
+                  className="p-1.5 rounded-lg border border-slate-200 bg-white text-slate-600 hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors cursor-pointer"
+                  title="Last Page"
+                >
+                  <ChevronsRight className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

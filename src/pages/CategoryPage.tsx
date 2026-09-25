@@ -72,7 +72,7 @@ export default function CategoryPage() {
 
           {/* Category Header */}
           <div className="mb-6">
-            <h1 className="font-serif-heading text-3xl sm:text-4xl font-bold text-[#142249] tracking-tight capitalize">
+            <h1 className="font-serif-heading text-3xl sm:text-4xl font-bold text-[#0C195A] tracking-tight capitalize">
               {activeTitle}
             </h1>
             <div className="w-14 sm:w-16 h-[3px] bg-amber-400 mt-2" />

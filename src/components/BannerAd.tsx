@@ -157,18 +157,18 @@ export default function BannerAd({ variant = 'leaderboard', className = '' }: Ba
   // Exact Leaderboard Banner using official /advertisement.png asset
   return (
     <div
-      className={`relative w-full h-24 sm:h-28 md:h-32 lg:h-36 overflow-hidden rounded-xs my-6 bg-[#073561] flex items-center justify-center select-none shadow-xs group cursor-pointer ${className}`}
+      className={`relative w-full h-16 sm:h-20 md:h-28 lg:h-32 overflow-hidden rounded-xs my-3 sm:my-6 bg-[#073561] flex items-center justify-center select-none shadow-xs group cursor-pointer ${className}`}
     >
       <div className="absolute inset-0 overflow-hidden flex items-center justify-center pointer-events-none">
         <img
           src="/advertisement.png"
           alt="Advertisement Banner"
-          className="w-full min-h-[310%] h-[340%] max-w-none object-cover object-center pointer-events-none transition-transform duration-700 group-hover:scale-105"
+          className="w-full h-full object-cover object-center pointer-events-none transition-transform duration-700 group-hover:scale-105"
         />
       </div>
 
       <div className="relative z-10 text-center pointer-events-none px-4">
-        <h2 className="font-serif-heading text-2xl sm:text-3xl md:text-4xl font-normal text-white tracking-wide drop-shadow-md">
+        <h2 className="font-serif-heading text-base sm:text-2xl md:text-3xl lg:text-4xl font-normal text-white tracking-wider drop-shadow-md">
           Advertisement
         </h2>
       </div>

@@ -40,7 +40,7 @@ export default function AdminLayout() {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 flex">
+    <div className="h-screen w-full bg-slate-50 flex overflow-hidden">
       {/* Mobile Sidebar Backdrop */}
       {mobileSidebarOpen && (
         <div
@@ -49,14 +49,14 @@ export default function AdminLayout() {
         />
       )}
 
-      {/* Sidebar Navigation */}
+      {/* Sidebar Navigation (Permanently Fixed) */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 w-64 bg-[#0A1640] text-slate-200 flex flex-col transition-transform duration-300 ease-in-out lg:static lg:translate-x-0 ${
+        className={`fixed inset-y-0 left-0 z-50 w-64 h-full bg-[#0A1640] text-slate-200 flex flex-col transition-transform duration-300 ease-in-out lg:translate-x-0 ${
           mobileSidebarOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
         {/* Sidebar Brand Header */}
-        <div className="h-16 flex items-center justify-between px-5 border-b border-white/10">
+        <div className="h-16 shrink-0 flex items-center justify-between px-5 border-b border-white/10">
           <Link to="/admin" className="flex items-center gap-2.5">
             <div className="relative h-10 w-32">
               <Image
@@ -69,7 +69,7 @@ export default function AdminLayout() {
           </Link>
           <button
             onClick={() => setMobileSidebarOpen(false)}
-            className="lg:hidden text-slate-400 hover:text-white p-1"
+            className="lg:hidden text-slate-400 hover:text-white p-1 cursor-pointer"
           >
             <CloseIcon className="w-5 h-5" />
           </button>
@@ -105,7 +105,7 @@ export default function AdminLayout() {
         </nav>
 
         {/* Sidebar Footer User Info & Logout */}
-        <div className="p-3 border-t border-white/10 bg-[#070F2E]">
+        <div className="p-3 shrink-0 border-t border-white/10 bg-[#070F2E]">
           <div className="flex items-center justify-between p-2 rounded-lg bg-white/5">
             <div className="flex items-center gap-2.5 min-w-0">
               <div className="w-8 h-8 rounded-full overflow-hidden shrink-0 border border-amber-400/40 relative">
@@ -132,10 +132,10 @@ export default function AdminLayout() {
         </div>
       </aside>
 
-      {/* Main Content Area */}
-      <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
-        {/* Top Navbar */}
-        <header className="h-16 bg-white border-b border-slate-200 px-4 sm:px-6 lg:px-8 flex items-center justify-between shadow-2xs">
+      {/* Main Content Area: Offset by sidebar on lg, body scrolls independently */}
+      <div className="lg:pl-64 flex-1 flex flex-col h-full min-w-0 overflow-hidden">
+        {/* Top Navbar: Pinned at top */}
+        <header className="h-16 shrink-0 bg-white border-b border-slate-200 px-4 sm:px-6 lg:px-8 flex items-center justify-between shadow-2xs z-30">
           <div className="flex items-center gap-3">
             <button
               onClick={() => setMobileSidebarOpen(true)}

@@ -115,7 +115,6 @@ export default function LoginPage() {
                 <label className="block text-xs font-medium text-slate-300">
                   Password
                 </label>
-                <span className="text-[11px] text-amber-400/90 font-mono">default: admin123</span>
               </div>
               <div className="relative rounded-lg shadow-xs">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">

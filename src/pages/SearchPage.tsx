@@ -49,8 +49,8 @@ export default function SearchPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
-      <div className="mb-8 border-b-2 border-[#142249] pb-3">
-        <h1 className="font-cinzel text-2xl md:text-3xl font-bold text-[#142249]">
+      <div className="mb-8 border-b-2 border-[#0C195A] pb-3">
+        <h1 className="font-cinzel text-2xl md:text-3xl font-bold text-[#0C195A]">
           {isZh ? '搜索结果' : 'Search Results'}: <span className="text-amber-600 font-normal">"{q}"</span>
         </h1>
         <p className="text-xs text-slate-400 mt-1">

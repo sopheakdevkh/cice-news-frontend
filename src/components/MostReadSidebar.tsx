@@ -35,7 +35,7 @@ export default function MostReadSidebar({
       <div className="bg-[#ebf5fe] p-4 sm:p-5">
         {/* Header with thin gold line */}
         <div className="pb-2 mb-4 border-b border-amber-300/90">
-          <h3 className="font-serif-heading text-lg sm:text-xl font-bold text-[#142249]">
+          <h3 className="font-serif-heading text-lg sm:text-xl font-bold text-[#0C195A]">
             {displayTitle}
           </h3>
         </div>
@@ -70,7 +70,7 @@ export default function MostReadSidebar({
                 {/* Title */}
                 <div className="flex-1 min-w-0 pt-0.5">
                   <Link to={getArticlePath(item.slug, lang)}>
-                    <h4 className="font-serif-heading text-xs sm:text-[13px] font-bold text-[#142249] leading-snug line-clamp-3 group-hover:text-sky-700 transition-colors">
+                    <h4 className="font-serif-heading text-xs sm:text-[13px] font-bold text-[#0C195A] leading-snug line-clamp-3 group-hover:text-sky-700 transition-colors">
                       {item.title}
                     </h4>
                   </Link>
@@ -93,12 +93,12 @@ export default function MostReadSidebar({
       {/* Follow Us Section */}
       <div className="bg-[#f8fafc] p-4">
         <div className="flex items-center gap-2 mb-3">
-          <div className="w-[3px] h-3.5 bg-[#142249]" />
-          <h4 className="font-serif-heading text-sm sm:text-base font-bold text-[#142249]">
+          <div className="w-[3px] h-3.5 bg-[#0C195A]" />
+          <h4 className="font-serif-heading text-sm sm:text-base font-bold text-[#0C195A]">
             {t('common.followUs')}
           </h4>
         </div>
-        <div className="flex items-center gap-3.5 sm:gap-4 text-[#142249]">
+        <div className="flex items-center gap-3.5 sm:gap-4 text-[#0C195A]">
           <a
             href="https://linkedin.com"
             target="_blank"

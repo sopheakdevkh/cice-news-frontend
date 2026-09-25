@@ -63,12 +63,12 @@ export default function HomePage() {
           {/* Header with Title and "查看全部 →" */}
           <div className="mb-6">
             <div className="flex items-center justify-between mb-1.5">
-              <h2 className="font-chinese-serif text-xl sm:text-2xl font-bold text-[#142249]">
+              <h2 className="font-chinese-serif text-xl sm:text-2xl font-bold text-[#0C195A]">
                 {t('common.chineseNews')}
               </h2>
               <Link
                 to="/zh"
-                className="text-xs sm:text-sm font-chinese-serif text-[#142249] hover:text-sky-800 transition-colors inline-flex items-center gap-1 group font-medium"
+                className="text-xs sm:text-sm font-bold text-[#0C195A] hover:text-sky-800 transition-colors inline-flex items-center gap-1 group font-medium"
               >
                 <span>{t('common.viewAll')}</span>
                 <span className="group-hover:translate-x-1 transition-transform">→</span>
@@ -76,7 +76,7 @@ export default function HomePage() {
             </div>
             {/* Composite line with solid gray matching Cambodia */}
             <div className="flex items-center h-[3px]">
-              <div className="w-20 sm:w-24 h-[3px] bg-[#142249]" />
+              <div className="w-20 sm:w-24 h-[3px] bg-[#0C195A]" />
               <div className="flex-1 h-[3px] bg-[#C6CAD9]" />
             </div>
           </div>
@@ -104,7 +104,7 @@ export default function HomePage() {
                 {/* Text Content with Padding */}
                 <div className="p-4 flex flex-col flex-1">
                   <Link to={`/zh/article/${item.slug}`}>
-                    <h3 className="font-chinese-serif text-sm font-bold text-[#142249] leading-snug line-clamp-2 group-hover:text-sky-800 transition-colors mb-3">
+                    <h3 className="font-chinese-serif text-sm font-bold text-[#0C195A] leading-snug line-clamp-2 group-hover:text-sky-800 transition-colors mb-3">
                       {item.title}
                     </h3>
                   </Link>

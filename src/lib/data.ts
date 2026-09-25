@@ -48,7 +48,7 @@ export const HERO_ARTICLE_EN: Article = {
   excerpt:
     "Cambodia's capital market reaches a new milestone as the country continues to strengthen its financial sector and attract international investment. The development reflects growing confidence in Cambodia's economic potential and its commitment to deeper integration with global markets.",
   date: 'Sep 12, 2026',
-  image: 'https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=1400&q=85',
+  image: 'https://cice.news/wp-content/uploads/2026/09/802032215_2911760719164575_3287661511473095817_n.png-7-edited-1.jpeg',
   readTime: '4 min read',
   author: {
     name: 'CICE Editorial Team',

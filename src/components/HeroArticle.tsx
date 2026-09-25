@@ -14,17 +14,18 @@ interface HeroArticleProps {
 export default function HeroArticle({ hero, subArticles, lang = 'en' }: HeroArticleProps) {
   const { t } = useTranslation();
   const isZh = lang === 'zh';
+  const serifFontClass = isZh ? 'font-chinese-serif' : 'font-serif-heading';
 
   return (
     <section className="my-6">
       {/* Section Header: CAMBODIA with two-tone underline */}
       <div className="mb-6">
         <div className="inline-block">
-          <h2 className="font-serif-heading text-xl sm:text-2xl font-bold text-[#142249] tracking-wider uppercase mb-2">
+          <h2 className={`${serifFontClass} text-xl sm:text-2xl font-bold text-[#0C195A] tracking-wider uppercase mb-2`}>
             {isZh ? '柬埔寨' : 'CAMBODIA'}
           </h2>
           <div className="w-full flex h-[3px]">
-            <div className="w-[30%] bg-[#142249]" />
+            <div className="w-[30%] bg-[#0C195A]" />
             <div className="w-[70%] bg-[#C6CAD9]" />
           </div>
         </div>
@@ -46,17 +47,28 @@ export default function HeroArticle({ hero, subArticles, lang = 'en' }: HeroArti
         </div>
 
         {/* Right: Article Details */}
-        <div className="lg:col-span-4 flex flex-col justify-between h-full pt-1">
+        <div className="lg:col-span-4 flex flex-col justify-start pt-1">
           <div>
-            <span className="inline-block text-[11px] font-bold text-[#142249] tracking-widest uppercase mb-2">
+            <span className="inline-block text-xs font-bold text-[#0C195A] tracking-widest uppercase mb-2.5">
               {hero.category}
             </span>
-            <Link to={getArticlePath(hero.slug, lang)}>
-              <h1 className="font-serif-heading text-2xl sm:text-3xl font-bold text-[#142249] leading-tight hover:text-sky-800 transition-colors mb-4">
-                {hero.title}
+            <Link to={getArticlePath(hero.slug, lang)} className="block group">
+              <h1
+                className={`${serifFontClass} text-xl sm:text-2xl lg:text-[25px] xl:text-[27px] font-bold text-[#0C195A] leading-[1.25] group-hover:text-sky-800 transition-colors mb-4 [text-wrap:balance]`}
+              >
+                {hero.title === "Cambodia's Capital Market Marks New Milestone" ? (
+                  <>
+                    <span className="block">Cambodia&apos;s Capital Market</span>
+                    <span className="block">Marks New Milestone</span>
+                  </>
+                ) : (
+                  hero.title
+                )}
               </h1>
             </Link>
-            <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-light mb-6">
+            <p
+              className={`${serifFontClass} text-sm sm:text-[15px] text-slate-800 leading-relaxed font-normal mb-6`}
+            >
               {hero.excerpt}
             </p>
           </div>
@@ -64,7 +76,7 @@ export default function HeroArticle({ hero, subArticles, lang = 'en' }: HeroArti
           <div>
             <Link
               to={getArticlePath(hero.slug, lang)}
-              className="inline-flex items-center gap-2 bg-[#142249] hover:bg-[#0e1936] text-white px-6 py-2.5 text-xs font-semibold tracking-wider transition-colors"
+              className={`inline-flex items-center gap-2.5 bg-[#0C195A] hover:bg-[#08103c] text-white px-7 py-3 text-xs sm:text-[13px] font-semibold tracking-wider uppercase transition-colors ${serifFontClass}`}
             >
               <span>{t('common.readMore')}</span>
               <span>→</span>
@@ -94,12 +106,12 @@ export default function HeroArticle({ hero, subArticles, lang = 'en' }: HeroArti
               />
             </Link>
 
-            <span className="text-[11px] font-bold text-[#142249] tracking-wider uppercase mb-1">
+            <span className="text-[11px] font-bold text-[#0C195A] tracking-wider uppercase mb-1">
               {article.category}
             </span>
 
             <Link to={getArticlePath(article.slug, lang)}>
-              <h3 className="font-serif-heading text-sm sm:text-base font-bold text-[#142249] leading-snug line-clamp-2 group-hover:text-sky-800 transition-colors mb-2">
+              <h3 className={`${serifFontClass} text-sm sm:text-base font-bold text-[#0C195A] leading-snug line-clamp-2 group-hover:text-sky-800 transition-colors mb-2`}>
                 {article.title}
               </h3>
             </Link>

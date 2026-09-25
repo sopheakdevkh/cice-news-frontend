@@ -175,10 +175,10 @@ export default function ChineseMagazineGrid() {
         {/* Right: 柬埔寨要闻 (01 - 05) */}
         <div className="lg:col-span-4 bg-white rounded-sm border border-slate-200/90 p-5 shadow-xs flex flex-col justify-between">
           <div>
-            <div className="flex items-center justify-between border-b-2 border-[#142249] pb-2 mb-3">
+            <div className="flex items-center justify-between border-b-2 border-[#0C195A] pb-2 mb-3">
               <div className="flex items-center gap-2">
                 <span className="w-1.5 h-4 bg-amber-500 rounded-xs" />
-                <h3 className="font-chinese-serif text-base font-bold text-[#142249]">
+                <h3 className="font-chinese-serif text-base font-bold text-[#0C195A]">
                   柬埔寨要闻
                 </h3>
               </div>
@@ -212,7 +212,7 @@ export default function ChineseMagazineGrid() {
 
                   <div className="flex-1 min-w-0">
                     <Link to={`/zh/article/${item.slug}`}>
-                      <h4 className="font-chinese-serif text-xs font-semibold text-[#142249] leading-snug line-clamp-2 group-hover:text-sky-800 transition-colors">
+                      <h4 className="font-chinese-serif text-xs font-semibold text-[#0C195A] leading-snug line-clamp-2 group-hover:text-sky-800 transition-colors">
                         {item.title}
                       </h4>
                     </Link>
@@ -243,7 +243,7 @@ export default function ChineseMagazineGrid() {
                   <div className="flex items-center justify-between border-b border-slate-200 pb-2 mb-3">
                     <div className="flex items-center gap-2">
                       <span className="w-1.5 h-3.5 bg-amber-500 rounded-xs" />
-                      <h3 className="font-chinese-serif text-sm font-bold text-[#142249]">
+                      <h3 className="font-chinese-serif text-sm font-bold text-[#0C195A]">
                         {sec.sectionTitle}
                       </h3>
                     </div>
@@ -270,7 +270,7 @@ export default function ChineseMagazineGrid() {
 
                   {/* Article Title */}
                   <Link to={`/zh/article/${sec.article.slug}`}>
-                    <h4 className="font-chinese-serif text-sm font-bold text-[#142249] leading-snug hover:text-sky-800 transition-colors line-clamp-2">
+                    <h4 className="font-chinese-serif text-sm font-bold text-[#0C195A] leading-snug hover:text-sky-800 transition-colors line-clamp-2">
                       {sec.article.title}
                     </h4>
                   </Link>
@@ -293,10 +293,10 @@ export default function ChineseMagazineGrid() {
         <aside className="lg:col-span-4 space-y-6">
           {/* Widget 1: 专栏·观点 */}
           <div className="bg-white rounded-sm border border-slate-200/80 p-5 shadow-xs">
-            <div className="flex items-center justify-between border-b-2 border-[#142249] pb-2 mb-4">
+            <div className="flex items-center justify-between border-b-2 border-[#0C195A] pb-2 mb-4">
               <div className="flex items-center gap-2">
                 <span className="w-1.5 h-4 bg-amber-500 rounded-xs" />
-                <h3 className="font-chinese-serif text-base font-bold text-[#142249]">
+                <h3 className="font-chinese-serif text-base font-bold text-[#0C195A]">
                   专栏 · 观点
                 </h3>
               </div>
@@ -319,7 +319,7 @@ export default function ChineseMagazineGrid() {
                 />
               </div>
               <div>
-                <h4 className="font-chinese-serif text-sm font-bold text-[#142249] leading-snug hover:text-sky-800 transition-colors cursor-pointer">
+                <h4 className="font-chinese-serif text-sm font-bold text-[#0C195A] leading-snug hover:text-sky-800 transition-colors cursor-pointer">
                   {CHINESE_OPINIONS.featured.title}
                 </h4>
                 <div className="mt-1 flex items-center gap-2 text-xs text-slate-500">
@@ -350,7 +350,7 @@ export default function ChineseMagazineGrid() {
                     />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h5 className="font-chinese-serif text-xs font-semibold text-[#142249] hover:text-sky-800 line-clamp-1 transition-colors cursor-pointer">
+                    <h5 className="font-chinese-serif text-xs font-semibold text-[#0C195A] hover:text-sky-800 line-clamp-1 transition-colors cursor-pointer">
                       {item.title}
                     </h5>
                     <p className="text-[11px] text-slate-400 mt-0.5">{item.author}</p>
@@ -405,7 +405,7 @@ export default function ChineseMagazineGrid() {
           <div className="bg-white rounded-sm border border-slate-200/80 p-5 shadow-xs">
             <div className="flex items-center gap-2 mb-2">
               <span className="w-1.5 h-4 bg-amber-500 rounded-xs" />
-              <h4 className="font-chinese-serif text-sm font-bold text-[#142249]">
+              <h4 className="font-chinese-serif text-sm font-bold text-[#0C195A]">
                 订阅 CICE News
               </h4>
             </div>
@@ -423,11 +423,11 @@ export default function ChineseMagazineGrid() {
                   value={emailInput}
                   onChange={(e) => setEmailInput(e.target.value)}
                   placeholder="请输入您的邮箱"
-                  className="flex-1 bg-slate-50 border border-slate-200 px-3 py-2 text-xs rounded-xs focus:outline-hidden focus:ring-1 focus:ring-[#142249]"
+                  className="flex-1 bg-slate-50 border border-slate-200 px-3 py-2 text-xs rounded-xs focus:outline-hidden focus:ring-1 focus:ring-[#0C195A]"
                 />
                 <button
                   type="submit"
-                  className="bg-[#142249] hover:bg-[#0e1936] text-white px-4 py-2 text-xs font-semibold rounded-xs transition-colors cursor-pointer"
+                  className="bg-[#0C195A] hover:bg-[#08103c] text-white px-4 py-2 text-xs font-semibold rounded-xs transition-colors cursor-pointer"
                 >
                   订阅
                 </button>

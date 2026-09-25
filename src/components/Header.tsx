@@ -30,11 +30,7 @@ export default function Header({ lang }: HeaderProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const rawCategories = lang === 'zh' ? CATEGORIES_ZH : CATEGORIES_EN;
-  const hasHome = rawCategories.some((cat) => cat.slug === '' || cat.slug === 'home');
-  const categories = hasHome
-    ? rawCategories
-    : [{ name: lang === 'zh' ? '首页' : 'Home', slug: '' }, ...rawCategories];
+  const navItems = lang === 'zh' ? CATEGORIES_ZH : CATEGORIES_EN;
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -201,52 +197,38 @@ export default function Header({ lang }: HeaderProps) {
         </div>
       </div>
 
-      {/* Thin Horizontal Divider Line spanning across */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="w-full border-t border-white/25" />
-      </div>
-
       {/* Category Navigation Bar */}
-      <nav className="w-full">
+      <nav className="w-full border-t border-white/20 border-b border-black/25 bg-[#0C195A]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ul className="hidden md:flex items-center justify-center space-x-8 lg:space-x-14 text-sm font-normal">
-            {categories.map((cat) => {
-              if ('isLangSwitch' in cat && (cat as any).isLangSwitch) {
-                const targetLang = lang === 'zh' ? 'en' : 'zh';
-                return (
-                  <li key="lang-switch" className="py-2.5">
-                    <Link
-                      to={getSwitchLanguageUrl(pathname, targetLang, location.search)}
-                      className="text-white hover:text-amber-300 transition-colors font-chinese-serif"
-                    >
-                      {cat.name}
-                    </Link>
-                  </li>
-                );
-              }
-
+          <ul className="hidden md:flex items-center justify-center space-x-6 sm:space-x-8 lg:space-x-12 xl:space-x-14">
+            {navItems.map((cat) => {
               const isHome = cat.slug === '' || cat.slug === 'home';
               const isChineseNews = cat.slug === 'chinese-news';
-              const to = getCategoryPath(cat.slug, lang);
+
+              const to = isChineseNews
+                ? '/zh'
+                : isHome
+                ? '/'
+                : getCategoryPath(cat.slug, lang);
 
               const isActive =
                 lang === 'zh'
                   ? isChineseNews
                     ? pathname === '/zh' || pathname === '/zh/' || pathname?.startsWith('/zh/category/chinese-news')
                     : isHome
-                    ? pathname === '/zh' || pathname === '/zh/'
+                    ? pathname === '/'
                     : pathname?.startsWith(`/zh/category/${cat.slug}`)
                   : isHome
                   ? pathname === '/'
                   : pathname?.startsWith(`/category/${cat.slug}`);
 
               return (
-                <li key={cat.slug || 'home'} className="relative py-2.5">
+                <li key={cat.slug || 'home'} className="relative py-2 sm:py-2.5">
                   <Link
                     to={to}
-                    className={`transition-colors duration-200 hover:text-amber-300 block ${
-                      isActive ? 'text-white font-medium' : 'text-white/90'
-                    }`}
+                    className={`text-sm sm:text-[15px] font-medium transition-colors duration-200 hover:text-amber-300 block ${
+                      isActive ? 'text-white font-semibold' : 'text-white/90'
+                    } ${lang === 'zh' ? 'font-chinese-serif' : 'font-serif-heading'}`}
                   >
                     {cat.name}
                   </Link>
@@ -280,49 +262,23 @@ export default function Header({ lang }: HeaderProps) {
                 </div>
               </form>
 
-              {/* Mobile Drawer Language Toggle */}
-              <div className="flex items-center justify-between px-3 py-2 border-b border-white/10 mb-2">
-                <span className="text-xs text-white/60">{t('common.language')}</span>
-                <div className="flex items-center gap-3 text-xs font-semibold">
-                  <Link
-                    to={getSwitchLanguageUrl(pathname, 'en', location.search)}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className={`relative py-0.5 ${
-                      lang === 'en' ? 'text-amber-400 font-bold' : 'text-white/80 hover:text-white'
-                    }`}
-                  >
-                    EN
-                    {lang === 'en' && <span className="block h-[2px] bg-amber-400 mt-0.5" />}
-                  </Link>
-                  <span className="text-white/30">|</span>
-                  <Link
-                    to={getSwitchLanguageUrl(pathname, 'zh', location.search)}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className={`relative py-0.5 font-chinese-serif ${
-                      lang === 'zh' ? 'text-amber-400 font-bold' : 'text-white/80 hover:text-white'
-                    }`}
-                  >
-                    中文
-                    {lang === 'zh' && <span className="block h-[2px] bg-amber-400 mt-0.5" />}
-                  </Link>
-                </div>
-              </div>
-              {categories.map((cat) => {
+              {/* Mobile Navigation Links */}
+              {navItems.map((cat) => {
                 const isHome = cat.slug === '' || cat.slug === 'home';
                 const isChineseNews = cat.slug === 'chinese-news';
-                const targetLang = lang === 'zh' ? 'en' : 'zh';
 
-                const to =
-                  'isLangSwitch' in cat && (cat as any).isLangSwitch
-                    ? getSwitchLanguageUrl(pathname, targetLang, location.search)
-                    : getCategoryPath(cat.slug, lang);
+                const to = isChineseNews
+                  ? '/zh'
+                  : isHome
+                  ? '/'
+                  : getCategoryPath(cat.slug, lang);
 
                 const isActive =
                   lang === 'zh'
                     ? isChineseNews
                       ? pathname === '/zh' || pathname === '/zh/' || pathname?.startsWith('/zh/category/chinese-news')
                       : isHome
-                      ? pathname === '/zh' || pathname === '/zh/'
+                      ? pathname === '/'
                       : pathname?.startsWith(`/zh/category/${cat.slug}`)
                     : isHome
                     ? pathname === '/'
@@ -337,7 +293,7 @@ export default function Header({ lang }: HeaderProps) {
                       isActive
                         ? 'bg-white/15 text-amber-300 font-medium'
                         : 'text-white hover:bg-white/10'
-                    }`}
+                    } ${lang === 'zh' ? 'font-chinese-serif' : 'font-serif-heading'}`}
                   >
                     {cat.name}
                   </Link>

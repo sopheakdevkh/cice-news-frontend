@@ -40,19 +40,19 @@ export default function CategoryList({
                 idx === articles.length - 1 ? 'sm:border-r-0 lg:border-r-0' : ''
               } mb-6 lg:mb-0 pb-6 lg:pb-0 border-b lg:border-b-0 last:border-b-0 last:mb-0 last:pb-0`}
             >
-              {/* Category Header with bold bar */}
+              {/* Category Header with two-tone bar */}
               <div className="mb-3">
-                <div className="flex items-end">
-                  <div className="inline-block">
-                    <Link
-                      to={getCategoryPath(item.categorySlug, lang)}
-                      className="font-serif-heading text-sm font-bold tracking-wider text-[#142249] hover:text-sky-800 transition-colors uppercase block pb-1.5"
-                    >
-                      {item.category}
-                    </Link>
-                    <div className="w-full h-[3px] bg-[#142249]" />
-                  </div>
-                  <div className="flex-1 h-[3px] bg-[#C6CAD9]" />
+                <Link
+                  to={getCategoryPath(item.categorySlug, lang)}
+                  className={`text-xl sm:text-2xl font-bold tracking-wider text-[#0C195A] hover:text-sky-800 transition-colors uppercase inline-block pb-1.5 ${
+                    isZh ? 'font-chinese-serif' : 'font-serif-heading'
+                  }`}
+                >
+                  {item.category}
+                </Link>
+                <div className="w-full flex h-[2.5px]">
+                  <div className="w-9 sm:w-10 bg-[#0C195A]" />
+                  <div className="flex-1 bg-[#C6CAD9]" />
                 </div>
               </div>
 
@@ -71,7 +71,7 @@ export default function CategoryList({
 
               {/* Card Title */}
               <Link to={getArticlePath(item.slug, lang)}>
-                <h3 className="font-serif-heading text-sm font-bold text-[#142249] leading-snug line-clamp-3 group-hover:text-sky-800 transition-colors mb-2">
+                <h3 className="font-serif-heading text-sm font-bold text-[#0C195A] leading-snug line-clamp-3 group-hover:text-sky-800 transition-colors mb-2">
                   {item.title}
                 </h3>
               </Link>
@@ -110,7 +110,7 @@ export default function CategoryList({
             {/* Article Info: Title + Date */}
             <div className="flex flex-col justify-start flex-1 pt-1">
               <Link to={getArticlePath(article.slug, lang)}>
-                <h2 className="font-serif-heading text-base sm:text-lg md:text-xl font-bold text-[#142249] leading-snug group-hover:text-sky-700 transition-colors mb-2.5">
+                <h2 className="font-serif-heading text-base sm:text-lg md:text-xl font-bold text-[#0C195A] leading-snug group-hover:text-sky-700 transition-colors mb-2.5">
                   {article.title}
                 </h2>
               </Link>

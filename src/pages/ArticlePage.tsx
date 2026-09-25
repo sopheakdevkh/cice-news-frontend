@@ -33,7 +33,7 @@ export default function ArticlePage() {
   if (!article) {
     return (
       <div className="max-w-4xl mx-auto px-4 py-16 text-center">
-        <h1 className="font-serif-heading text-3xl font-bold text-[#142249] mb-4">
+        <h1 className="font-serif-heading text-3xl font-bold text-[#0C195A] mb-4">
           {t('common.articleNotFound')}
         </h1>
         <p className="text-slate-500 mb-8">
@@ -41,7 +41,7 @@ export default function ArticlePage() {
         </p>
         <Link
           to={getHomePath(lang)}
-          className="inline-block bg-[#142249] text-white px-6 py-2.5 rounded-xs text-sm font-semibold hover:bg-sky-900 transition-colors"
+          className="inline-block bg-[#0C195A] text-white px-6 py-2.5 rounded-xs text-sm font-semibold hover:bg-sky-900 transition-colors"
         >
           {t('common.returnHome')}
         </Link>
@@ -98,7 +98,7 @@ export default function ArticlePage() {
           </span>
 
           {/* Headline */}
-          <h1 className="font-serif-heading text-2xl sm:text-3xl md:text-4xl font-bold text-[#142249] leading-tight mb-4">
+          <h1 className="font-serif-heading text-2xl sm:text-3xl md:text-4xl font-bold text-[#0C195A] leading-tight mb-4">
             {article.title}
           </h1>
 
@@ -198,12 +198,12 @@ export default function ArticlePage() {
                   to={getArticlePath(prevArticle.slug, lang)}
                   className="flex items-center gap-3.5 group pr-2 sm:pr-4"
                 >
-                  <ChevronLeft className="w-6 h-6 text-[#142249] shrink-0 stroke-[3] group-hover:-translate-x-1 transition-transform" />
+                  <ChevronLeft className="w-6 h-6 text-[#0C195A] shrink-0 stroke-[3] group-hover:-translate-x-1 transition-transform" />
                   <div className="min-w-0">
-                    <span className="text-xs font-bold text-[#142249] tracking-wider uppercase block mb-1">
+                    <span className="text-xs font-bold text-[#0C195A] tracking-wider uppercase block mb-1">
                       {t('common.previous')}
                     </span>
-                    <p className="text-xs sm:text-sm font-medium text-[#142249] leading-snug line-clamp-2 group-hover:text-sky-700 transition-colors">
+                    <p className="text-xs sm:text-sm font-medium text-[#0C195A] leading-snug line-clamp-2 group-hover:text-sky-700 transition-colors">
                       {prevArticle.title}
                     </p>
                   </div>
@@ -222,14 +222,14 @@ export default function ArticlePage() {
                   className="flex items-center justify-end gap-3.5 group pl-2 sm:pl-4 text-right ml-auto"
                 >
                   <div className="min-w-0">
-                    <span className="text-xs font-bold text-[#142249] tracking-wider uppercase block mb-1">
+                    <span className="text-xs font-bold text-[#0C195A] tracking-wider uppercase block mb-1">
                       {t('common.next')}
                     </span>
-                    <p className="text-xs sm:text-sm font-medium text-[#142249] leading-snug line-clamp-2 group-hover:text-sky-700 transition-colors">
+                    <p className="text-xs sm:text-sm font-medium text-[#0C195A] leading-snug line-clamp-2 group-hover:text-sky-700 transition-colors">
                       {nextArticle.title}
                     </p>
                   </div>
-                  <ChevronRight className="w-6 h-6 text-[#142249] shrink-0 stroke-[3] group-hover:translate-x-1 transition-transform" />
+                  <ChevronRight className="w-6 h-6 text-[#0C195A] shrink-0 stroke-[3] group-hover:translate-x-1 transition-transform" />
                 </Link>
               ) : (
                 <div />
