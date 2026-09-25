@@ -1,0 +1,54 @@
+{
+  "common": {
+    "home": "Home",
+    "search": "Search",
+    "searchPlaceholder": "Search...",
+    "readMore": "READ MORE",
+    "viewAll": "View All",
+    "previous": "PREVIOUS",
+    "next": "NEXT",
+    "share": "Share",
+    "minRead": "{{count}} min read",
+    "mostRead": "Most Read",
+    "cambodiaHighlights": "Cambodia Highlights",
+    "followUs": "Follow Us",
+    "advertisement": "Advertisement",
+    "sponsored": "Sponsored",
+    "chineseNews": "Chinese News",
+    "matchesFound": "{{count}} matches found",
+    "noArticlesFound": "No articles matched your search query.",
+    "articleNotFound": "Article Not Found",
+    "articleNotFoundDesc": "The article you are looking for does not exist or has been moved.",
+    "returnHome": "Return to Home",
+    "language": "Language"
+  },
+  "nav": {
+    "home": "Home",
+    "cambodia": "Cambodia",
+    "world": "World",
+    "business": "Business",
+    "diplomacy": "Diplomacy",
+    "insight": "Insight",
+    "chineseNews": "Chinese News"
+  },
+  "footer": {
+    "aboutUs": "About Us",
+    "contact": "Contact",
+    "advertising": "Advertising",
+    "termsOfUse": "Terms of Use",
+    "privacyPolicy": "Privacy Policy",
+    "rights": "© 2026 CICE News . All rights reserved.",
+    "tagline": "A Media Platform for a More Connected Cambodia"
+  },
+  "admin": {
+    "title": "Newsroom Management System",
+    "dashboard": "Dashboard",
+    "allArticles": "All Articles",
+    "newArticle": "New Article",
+    "categories": "Categories",
+    "advertisements": "Advertisements",
+    "portalSettings": "Portal Settings",
+    "logout": "Log Out",
+    "viewPublicPortal": "View Public Portal"
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "common": {
+    "home": "首页",
+    "search": "搜索",
+    "searchPlaceholder": "搜索...",
+    "readMore": "阅读更多",
+    "viewAll": "查看全部",
+    "previous": "上一篇",
+    "next": "下一篇",
+    "share": "分享",
+    "minRead": "{{count}} 分钟阅读",
+    "mostRead": "柬埔寨要闻",
+    "cambodiaHighlights": "相关要闻",
+    "followUs": "关注我们",
+    "advertisement": "广告",
+    "sponsored": "赞助内容",
+    "chineseNews": "中文新闻",
+    "matchesFound": "{{count}} 条相关结果",
+    "noArticlesFound": "未找到相关文章，请尝试其他关键词。",
+    "articleNotFound": "未找到该文章",
+    "articleNotFoundDesc": "抱歉，您请求的文章不存在或已被移除。",
+    "returnHome": "返回首页",
+    "language": "语言"
+  },
+  "nav": {
+    "home": "首页",
+    "cambodia": "柬埔寨",
+    "world": "国际",
+    "business": "商业",
+    "diplomacy": "外交",
+    "insight": "观点",
+    "chineseNews": "中文新闻"
+  },
+  "footer": {
+    "aboutUs": "关于我们",
+    "contact": "联系我们",
+    "advertising": "广告合作",
+    "termsOfUse": "服务条款",
+    "privacyPolicy": "隐私政策",
+    "rights": "© 2026 CICE News . 版权所有。",
+    "tagline": "连接柬埔寨 · 传递世界回响"
+  },
+  "admin": {
+    "title": "新闻采编与管理系统",
+    "dashboard": "控制台",
+    "allArticles": "文章列表",
+    "newArticle": "发布新文章",
+    "categories": "分类专栏",
+    "advertisements": "广告位管理",
+    "portalSettings": "门户设置",
+    "logout": "退出登录",
+    "viewPublicPortal": "访问前台网站"
+  }
+}
