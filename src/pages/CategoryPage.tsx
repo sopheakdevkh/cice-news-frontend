@@ -7,6 +7,7 @@ import Pagination from '@/components/Pagination';
 import { detectLang, getHomePath } from '@/lib/routes';
 import {
   CATEGORY_ARTICLES_MAP,
+  CATEGORY_ARTICLES_ZH_MAP,
   MOST_READ_ARTICLES_EN,
   CHINESE_TOP_NEWS,
 } from '@/lib/data';
@@ -46,10 +47,14 @@ export default function CategoryPage() {
   }, [isZh, titleZh, titleEn]);
 
   // Articles for this category
-  const articles =
-    CATEGORY_ARTICLES_MAP[slug] ||
-    CATEGORY_ARTICLES_MAP['cambodia'] ||
-    [];
+  const articles = isZh
+    ? (CATEGORY_ARTICLES_ZH_MAP[slug] ||
+       CATEGORY_ARTICLES_ZH_MAP['cambodia'] ||
+       CATEGORY_ARTICLES_MAP[slug] ||
+       [])
+    : (CATEGORY_ARTICLES_MAP[slug] ||
+       CATEGORY_ARTICLES_MAP['cambodia'] ||
+       []);
 
   const mostRead = isZh ? CHINESE_TOP_NEWS : MOST_READ_ARTICLES_EN;
 
@@ -60,7 +65,7 @@ export default function CategoryPage() {
         {/* Left Column: Breadcrumb + Category Header + Article Feed */}
         <div className="lg:col-span-8">
           {/* Breadcrumb Navigation: Home > Category */}
-          <nav className="flex items-center gap-1.5 text-xs text-sky-800 mb-2 font-light uppercase">
+          <nav className="flex items-center gap-1.5 text-xs text-sky-800 mb-2 font-light">
             <Link to={getHomePath(lang)} className="text-sky-800 hover:underline">
               {t('common.home')}
             </Link>
@@ -72,7 +77,7 @@ export default function CategoryPage() {
 
           {/* Category Header */}
           <div className="mb-6">
-            <h1 className="font-serif-heading text-3xl sm:text-4xl font-bold text-[#0C195A] tracking-tight capitalize">
+            <h1 className="font-serif-heading text-3xl sm:text-4xl font-bold text-[#0C195A] tracking-tight">
               {activeTitle}
             </h1>
             <div className="w-14 sm:w-16 h-[3px] bg-amber-400 mt-2" />
@@ -94,6 +99,7 @@ export default function CategoryPage() {
             articles={mostRead}
             lang={isZh ? 'zh' : 'en'}
             showAd={true}
+            showFollowUs={false}
           />
         </div>
       </div>

@@ -20,7 +20,7 @@ export default function ArticlePage() {
   const { slug = '' } = useParams<{ slug?: string }>();
   const lang = detectLang(location.pathname);
   const isZh = lang === 'zh';
-  const article = getArticleBySlugFromStore(slug) || getArticleBySlug(slug);
+  const article = getArticleBySlugFromStore(slug, lang) || getArticleBySlug(slug, lang);
 
   useEffect(() => {
     if (article) {
@@ -78,14 +78,14 @@ export default function ArticlePage() {
         {/* Left: Article Reader Body (8 cols) */}
         <article className="lg:col-span-8">
           {/* Breadcrumb Navigation */}
-          <nav className="flex items-center gap-1.5 text-xs text-sky-800 mb-3 font-light uppercase">
-            <Link to={getHomePath(lang)} className="text-sky-800 hover:underline uppercase">
+          <nav className="flex items-center gap-1.5 text-xs text-sky-800 mb-3 font-light">
+            <Link to={getHomePath(lang)} className="text-sky-800 hover:underline">
               {isZh ? '首页' : 'Home'}
             </Link>
             <span className="text-slate-400">&gt;</span>
             <Link
               to={getCategoryPath(article.categorySlug, lang)}
-              className="text-sky-800 hover:underline uppercase"
+              className="text-sky-800 hover:underline"
             >
               {article.category}
             </Link>
@@ -93,7 +93,7 @@ export default function ArticlePage() {
             <span className="text-slate-400 truncate max-w-xs">{article.title}</span>
           </nav>
           {/* Category Tag */}
-          <span className="inline-block text-xs font-bold text-sky-800 tracking-wider uppercase mb-3">
+          <span className="inline-block text-xs font-bold text-sky-800 tracking-wider mb-3">
             {article.category}
           </span>
 
@@ -111,14 +111,14 @@ export default function ArticlePage() {
               </span>
               <span className="flex items-center gap-1.5">
                 <Clock className="w-3.5 h-3.5 text-slate-400" />
-                {article.readTime || '3 min read'}
+                {article.readTime || (isZh ? '4分钟阅读' : '4 min read')}
               </span>
             </div>
 
             {/* Social Share */}
             <div className="flex items-center gap-2">
-              <span className="text-slate-400 text-[11px] uppercase tracking-wider mr-1">
-                {t('common.share')}:
+              <span className="text-slate-400 text-[11px] tracking-wider mr-1">
+                {isZh ? '分享:' : `${t('common.share')}:`}
               </span>
               <button
                 className="p-1 rounded hover:bg-slate-100 text-slate-600 hover:text-sky-700 transition-colors cursor-pointer"

@@ -97,7 +97,7 @@ export default function CategoryList({
             {/* Article Thumbnail */}
             <Link
               to={getArticlePath(article.slug, lang)}
-              className="relative h-52 sm:h-44 md:h-48 sm:w-72 md:w-80 shrink-0 overflow-hidden block"
+              className="relative h-52 sm:h-44 md:h-55 sm:w-72 md:w-90 shrink-0 overflow-hidden block"
             >
               <Image
                 src={article.image}

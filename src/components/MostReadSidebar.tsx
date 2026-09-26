@@ -18,6 +18,7 @@ interface MostReadSidebarProps {
   lang?: 'en' | 'zh';
   title?: string;
   showAd?: boolean;
+  showFollowUs?: boolean;
 }
 
 export default function MostReadSidebar({
@@ -25,6 +26,7 @@ export default function MostReadSidebar({
   lang = 'en',
   title,
   showAd = true,
+  showFollowUs = false,
 }: MostReadSidebarProps) {
   const { t } = useTranslation();
   const displayTitle = title || t('common.mostRead');
@@ -84,68 +86,70 @@ export default function MostReadSidebar({
       {/* 3 Horizontal Sidebar Ads */}
       {showAd && (
         <div className="space-y-4 pt-4">
-          <BannerAd variant="ad-city" />
-          <BannerAd variant="ad-partner" />
-          <BannerAd variant="ad-globe" />
+          <BannerAd variant="ad-city" lang={lang} />
+          <BannerAd variant="ad-partner" lang={lang} />
+          <BannerAd variant="ad-globe" lang={lang} />
         </div>
       )}
 
       {/* Follow Us Section */}
-      <div className="bg-[#f8fafc] p-4">
-        <div className="flex items-center gap-2 mb-3">
-          <div className="w-[3px] h-3.5 bg-[#0C195A]" />
-          <h4 className="font-serif-heading text-sm sm:text-base font-bold text-[#0C195A]">
-            {t('common.followUs')}
-          </h4>
+      {showFollowUs && (
+        <div className="bg-[#f8fafc] p-4">
+          <div className="flex items-center gap-2 mb-3">
+            <div className="w-[3px] h-3.5 bg-[#0C195A]" />
+            <h4 className="font-serif-heading text-sm sm:text-base font-bold text-[#0C195A]">
+              {t('common.followUs')}
+            </h4>
+          </div>
+          <div className="flex items-center gap-3.5 sm:gap-4 text-[#0C195A]">
+            <a
+              href="https://linkedin.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              className="hover:text-amber-500 transition-colors"
+            >
+              <LinkedInIcon className="w-4 h-4" />
+            </a>
+            <a
+              href="https://facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook"
+              className="hover:text-amber-500 transition-colors"
+            >
+              <FacebookIcon className="w-4 h-4" />
+            </a>
+            <a
+              href="https://x.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="X"
+              className="hover:text-amber-500 transition-colors"
+            >
+              <XIcon className="w-4 h-4" />
+            </a>
+            <a
+              href="https://youtube.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="YouTube"
+              className="hover:text-amber-500 transition-colors"
+            >
+              <YoutubeIcon className="w-4 h-4" />
+            </a>
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              className="hover:text-amber-500 transition-colors"
+            >
+              <InstagramIcon className="w-4 h-4" />
+            </a>
+          </div>
         </div>
-        <div className="flex items-center gap-3.5 sm:gap-4 text-[#0C195A]">
-          <a
-            href="https://linkedin.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn"
-            className="hover:text-amber-500 transition-colors"
-          >
-            <LinkedInIcon className="w-4 h-4" />
-          </a>
-          <a
-            href="https://facebook.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Facebook"
-            className="hover:text-amber-500 transition-colors"
-          >
-            <FacebookIcon className="w-4 h-4" />
-          </a>
-          <a
-            href="https://x.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="X"
-            className="hover:text-amber-500 transition-colors"
-          >
-            <XIcon className="w-4 h-4" />
-          </a>
-          <a
-            href="https://youtube.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="YouTube"
-            className="hover:text-amber-500 transition-colors"
-          >
-            <YoutubeIcon className="w-4 h-4" />
-          </a>
-          <a
-            href="https://instagram.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Instagram"
-            className="hover:text-amber-500 transition-colors"
-          >
-            <InstagramIcon className="w-4 h-4" />
-          </a>
-        </div>
-      </div>
+      )}
     </aside>
   );
 }

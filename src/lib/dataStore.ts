@@ -6,10 +6,11 @@ import {
   CHINESE_TOP_NEWS,
   CHINESE_PREVIEW_ARTICLES,
   CATEGORY_ARTICLES_MAP,
+  CATEGORY_ARTICLES_ZH_MAP,
   Article,
 } from './data';
 
-const STORAGE_KEY = 'cice_articles_store_v1';
+const STORAGE_KEY = 'cice_articles_store_v3';
 
 export interface AdminArticle extends Article {
   status: 'published' | 'draft';
@@ -31,7 +32,15 @@ function getInitialArticles(): AdminArticle[] {
   // Also include category map articles if not already present
   Object.values(CATEGORY_ARTICLES_MAP).forEach((list) => {
     list.forEach((art) => {
-      if (!initial.some((item) => item.slug === art.slug)) {
+      if (!initial.some((item) => item.slug === art.slug && (item.lang || 'en') === (art.lang || 'en'))) {
+        initial.push({ ...art, status: 'published' });
+      }
+    });
+  });
+
+  Object.values(CATEGORY_ARTICLES_ZH_MAP).forEach((list) => {
+    list.forEach((art) => {
+      if (!initial.some((item) => item.slug === art.slug && (item.lang || 'en') === (art.lang || 'en'))) {
         initial.push({ ...art, status: 'published' });
       }
     });
@@ -43,12 +52,23 @@ function getInitialArticles(): AdminArticle[] {
 export function loadArticles(): AdminArticle[] {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
+    const initial = getInitialArticles();
     if (!raw) {
-      const initial = getInitialArticles();
       saveAllArticles(initial);
       return initial;
     }
-    return JSON.parse(raw);
+    const stored: AdminArticle[] = JSON.parse(raw);
+    let hasNew = false;
+    initial.forEach((initArt) => {
+      if (!stored.some((item) => item.slug === initArt.slug && (item.lang || 'en') === (initArt.lang || 'en'))) {
+        stored.push(initArt);
+        hasNew = true;
+      }
+    });
+    if (hasNew) {
+      saveAllArticles(stored);
+    }
+    return stored;
   } catch (err) {
     console.error('Failed to load articles from storage:', err);
     return getInitialArticles();
@@ -70,8 +90,12 @@ export function getArticleById(id: string): AdminArticle | undefined {
   return articles.find((a) => a.id === id);
 }
 
-export function getArticleBySlugFromStore(slug: string): AdminArticle | undefined {
+export function getArticleBySlugFromStore(slug: string, lang?: 'en' | 'zh'): AdminArticle | undefined {
   const articles = loadArticles();
+  if (lang) {
+    const matched = articles.find((a) => a.slug === slug && (a.lang || 'en') === lang);
+    if (matched) return matched;
+  }
   return articles.find((a) => a.slug === slug);
 }
 
